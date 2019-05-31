@@ -155,6 +155,8 @@ class OfstedReports
 					if tries < 5
 						sleep tries * 5.0 + rand * 5.0
 						puts " *** Connection failed (#{e.message}) on #{report_url}, retrying..."
+						puts e
+						tries = tries + 1
 						retry 
 					else
 						next
@@ -274,6 +276,13 @@ SECONDARY = 2
 search_words = [
 	"scien",
 	"math",
+	"engineering",
+	"engineer",
+	"music",
+	"geography",
+	"modern foregin languages|MFL",
+	"art",
+	"computing|computer science",
 	"investigation|experiment",
 	"CPD|professional development",
 	"neuroscience",
@@ -291,16 +300,16 @@ search_words = [
 	"English"
 ]
 
-primary_reports = OfstedReports.new("2017-18 Academic year - Primary", "./17-18P", PRIMARY, "01-09-2017", "31-07-2018", search_words)
+#primary_reports = OfstedReports.new("2009-19 Primary", "./output", PRIMARY, "01-09-2009", "25-04-2019", search_words)
 #primary_reports.do_search()
 #primary_reports.get_all_school_report_details()
 #primary_reports.download_all_report_pdfs()
 #primary_reports.convert_pdfs()
-primary_reports.write_CSV(primary_reports.scan, "_search_results")
+#primary_reports.write_CSV(primary_reports.scan, "_search_results")
 
-secondary_reports = OfstedReports.new("2017-18 Academic year - Secondary", "./output", SECONDARY, "01-09-2017", "31-07-2018", search_words)
-#secondary_reports.do_search()
-#secondary_reports.get_all_school_report_details()
-#secondary_reports.download_all_report_pdfs()
-#secondary_reports.convert_pdfs()
+secondary_reports = OfstedReports.new("2009-19 Secondary", "./output", SECONDARY, "01-09-2009", "25-04-2019", search_words)
+secondary_reports.do_search()
+secondary_reports.get_all_school_report_details()
+secondary_reports.download_all_report_pdfs()
+secondary_reports.convert_pdfs()
 secondary_reports.write_CSV(secondary_reports.scan, "_search_results")
